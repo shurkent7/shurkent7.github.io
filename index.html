@@ -14,8 +14,8 @@
     <meta property="og:description" content="Любые сантехнические работы. Качественно, чисто, с гарантией.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://santehnik-nikolaev.pp.ua">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232e7d32'%3E%3Cpath d='M20 14.5v-2a1 1 0 0 0-1-1h-1.3l-1.9-3.8A3 3 0 0 0 12.2 6H8v2h4.2a1 1 0 0 1 .9.6L14.5 12H5a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.2l.5 2a2 2 0 0 0 2 1.5h7a2 2 0 0 0 1.8-1.2l.8-1.8h.7a1 1 0 0 0 1-1v-2zM8 18a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z'/%3E%3C/svg%3E">
+    <!-- Favicon светло-синий -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230285c9'%3E%3Cpath d='M20 14.5v-2a1 1 0 0 0-1-1h-1.3l-1.9-3.8A3 3 0 0 0 12.2 6H8v2h4.2a1 1 0 0 1 .9.6L14.5 12H5a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.2l.5 2a2 2 0 0 0 2 1.5h7a2 2 0 0 0 1.8-1.2l.8-1.8h.7a1 1 0 0 0 1-1v-2zM8 18a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z'/%3E%3C/svg%3E">
     <style>
         * {
             margin: 0;
@@ -24,8 +24,8 @@
         }
         body {
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: #f8fafc;
-            color: #0f172a;
+            background: #f4f9ff;
+            color: #0a2540;
             line-height: 1.4;
             scroll-behavior: smooth;
         }
@@ -34,14 +34,14 @@
             margin: 0 auto;
             padding: 0 20px;
         }
-        /* Шапка */
+        /* Шапка (светло-синяя тема) */
         .header {
-            background: #fff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(2, 122, 197, 0.08);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #cae3f5;
         }
         .nav {
             display: flex;
@@ -54,7 +54,7 @@
         .logo {
             font-size: 1.6rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #15803d, #2b9348);
+            background: linear-gradient(135deg, #0284c9, #0f67b3);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -63,19 +63,19 @@
         /* Десктопное меню */
         .nav-links {
             display: flex;
-            gap: 24px;
+            gap: 26px;
             align-items: center;
         }
         .nav-links a {
             text-decoration: none;
-            color: #1e293b;
+            color: #1e3a5f;
             font-weight: 500;
             transition: color 0.2s;
         }
         .nav-links a:hover {
-            color: #15803d;
+            color: #0284c9;
         }
-        /* Гамбургер (скрыт на десктопе) */
+        /* Гамбургер */
         .burger {
             display: none;
             flex-direction: column;
@@ -87,7 +87,7 @@
         .burger span {
             width: 28px;
             height: 3px;
-            background: #15803d;
+            background: #0284c9;
             margin: 4px 0;
             transition: 0.3s;
             border-radius: 4px;
@@ -116,12 +116,12 @@
             text-decoration: none;
             font-size: 1.3rem;
             font-weight: 600;
-            color: #1e293b;
+            color: #1e3a5f;
             padding: 8px 0;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #cae3f5;
         }
         .mobile-menu a:hover {
-            color: #15803d;
+            color: #0284c9;
         }
         .overlay {
             position: fixed;
@@ -136,10 +136,10 @@
         .overlay.active {
             display: block;
         }
-        /* Кнопки */
+        /* Кнопки (светло-синий акцент) */
         .btn {
             display: inline-block;
-            background: #15803d;
+            background: #0284c9;
             color: white;
             padding: 12px 28px;
             border-radius: 40px;
@@ -149,24 +149,26 @@
             border: none;
             cursor: pointer;
             font-size: 1rem;
+            box-shadow: 0 2px 6px rgba(2,132,201,0.2);
         }
         .btn:hover {
-            background: #0f6c34;
+            background: #006aa8;
             transform: scale(0.97);
         }
         .btn-outline {
             background: transparent;
-            border: 2px solid #15803d;
-            color: #15803d;
+            border: 2px solid #0284c9;
+            color: #0284c9;
+            box-shadow: none;
         }
         .btn-outline:hover {
-            background: #15803d;
+            background: #0284c9;
             color: white;
         }
         /* Герой */
         .hero {
             padding: 70px 0 60px;
-            background: linear-gradient(120deg, #f1f5f9 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #eef5fc 0%, #ffffff 100%);
         }
         .hero-grid {
             display: flex;
@@ -183,16 +185,24 @@
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 20px;
+            color: #0a2540;
         }
         .hero-content p {
             font-size: 1.2rem;
-            color: #334155;
+            color: #2c5a7a;
             margin-bottom: 30px;
         }
         .hero-stats {
             display: flex;
             gap: 24px;
             margin-top: 20px;
+        }
+        .hero-stats div {
+            font-weight: 600;
+            background: #ffffffcc;
+            padding: 6px 14px;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
         }
         .hero-img {
             flex: 0.8;
@@ -207,17 +217,18 @@
             margin-bottom: 48px;
             text-align: center;
             position: relative;
+            color: #0a2540;
         }
         .section-title:after {
             content: '';
             display: block;
             width: 70px;
             height: 4px;
-            background: #15803d;
+            background: #0284c9;
             margin: 12px auto 0;
             border-radius: 4px;
         }
-        /* Услуги */
+        /* Услуги карточки */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -228,11 +239,13 @@
             padding: 30px 20px;
             border-radius: 28px;
             text-align: center;
-            box-shadow: 0 12px 24px -12px rgba(0,0,0,0.08);
+            box-shadow: 0 12px 24px -12px rgba(2,132,201,0.12);
             transition: all 0.2s;
+            border: 1px solid #d9ebfa;
         }
         .service-card:hover {
             transform: translateY(-6px);
+            border-color: #0284c9;
         }
         .service-icon {
             font-size: 2.8rem;
@@ -245,7 +258,7 @@
             gap: 24px;
         }
         .gallery-item {
-            background: #e2e8f0;
+            background: #cfe3f5;
             border-radius: 24px;
             overflow: hidden;
             height: 220px;
@@ -261,15 +274,16 @@
             padding: 24px;
             max-width: 800px;
             margin: 0 auto;
+            border: 1px solid #cae3f5;
         }
         .price-row {
             display: flex;
             justify-content: space-between;
             padding: 16px 0;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2edf7;
             font-size: 1.1rem;
         }
-        /* Отзывы (слайдер/сетка) */
+        /* Отзывы */
         .reviews-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -283,6 +297,7 @@
             border-radius: 28px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.05);
             transition: 0.2s;
+            border: 1px solid #d9ebfa;
         }
         .review-header {
             display: flex;
@@ -293,23 +308,16 @@
         .review-avatar {
             width: 50px;
             height: 50px;
-            background: #15803d20;
+            background: #d4e8fc;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.6rem;
         }
-        .review-name {
-            font-weight: 700;
-        }
         .review-stars {
             color: #fbbf24;
             letter-spacing: 2px;
-        }
-        .review-text {
-            color: #334155;
-            line-height: 1.5;
         }
         /* ЧаВо */
         .faq-grid {
@@ -323,18 +331,20 @@
             padding: 20px 24px;
             cursor: pointer;
             transition: 0.2s;
+            border: 1px solid #cae3f5;
         }
         .faq-question {
             font-weight: 700;
             font-size: 1.2rem;
             display: flex;
             justify-content: space-between;
+            color: #0a2540;
         }
         .faq-answer {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
-            color: #334155;
+            color: #2c5a7a;
             margin-top: 8px;
         }
         .faq-item.active .faq-answer {
@@ -347,7 +357,8 @@
             margin: 0 auto;
             padding: 40px;
             border-radius: 40px;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 35px -12px rgba(2,132,201,0.15);
+            border: 1px solid #cae3f5;
         }
         .form-group {
             margin-bottom: 20px;
@@ -355,15 +366,15 @@
         input, textarea {
             width: 100%;
             padding: 14px 18px;
-            border: 1px solid #cbd5e1;
+            border: 1px solid #cbddee;
             border-radius: 32px;
             font-size: 1rem;
             outline: none;
             transition: 0.2s;
         }
         input:focus, textarea:focus {
-            border-color: #15803d;
-            box-shadow: 0 0 0 3px rgba(21,128,61,0.2);
+            border-color: #0284c9;
+            box-shadow: 0 0 0 3px rgba(2,132,201,0.2);
         }
         .form-status {
             margin-top: 16px;
@@ -372,8 +383,8 @@
         }
         /* Футер */
         .footer {
-            background: #0f172a;
-            color: #cbd5e1;
+            background: #0a2a44;
+            color: #cbddee;
             padding: 48px 0 24px;
         }
         .footer-inner {
@@ -386,9 +397,9 @@
             text-align: center;
             margin-top: 40px;
             padding-top: 24px;
-            border-top: 1px solid #334155;
+            border-top: 1px solid #2c5a7a;
         }
-        /* Плавающая зеленая кнопка */
+        /* Плавающая зеленая кнопка звонка (остается зеленой, как просили) */
         .floating-phone {
             position: fixed;
             bottom: 28px;
@@ -423,17 +434,58 @@
             stroke-width: 1.8;
             fill: none;
         }
+        /* Мобильные две кнопки (звонок + заявка) */
+        .mobile-buttons {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            padding: 0 20px;
+            gap: 16px;
+            z-index: 999;
+            justify-content: center;
+        }
+        .mobile-buttons .btn-call,
+        .mobile-buttons .btn-order {
+            flex: 1;
+            text-align: center;
+            padding: 14px 0;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            backdrop-filter: blur(8px);
+            transition: 0.2s;
+        }
+        .mobile-buttons .btn-call {
+            background: #22c55e;
+            color: white;
+            box-shadow: 0 4px 14px rgba(34,197,94,0.4);
+            border: none;
+        }
+        .mobile-buttons .btn-order {
+            background: #0284c9;
+            color: white;
+            box-shadow: 0 4px 12px rgba(2,132,201,0.4);
+        }
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2.2rem; }
             .nav-links { display: none; }
             .burger { display: flex; }
+            .hero-stats { gap: 12px; flex-wrap: wrap; }
             .btn-outline { display: none; }
             .container { padding: 0 18px; }
-            .floating-phone { width: 56px; height: 56px; bottom: 20px; right: 20px; }
+            /* на мобильных плавающая зеленая кнопка меньше, но не конфликтует */
+            .floating-phone { width: 56px; height: 56px; bottom: 100px; right: 20px; }
             .floating-phone svg { width: 28px; height: 28px; }
+            /* показываем две кнопки внизу */
+            .mobile-buttons {
+                display: flex;
+            }
         }
         @media (min-width: 769px) {
-            .mobile-menu, .overlay { display: none !important; }
+            .mobile-menu, .overlay, .mobile-buttons { display: none !important; }
         }
     </style>
 </head>
@@ -468,11 +520,17 @@
     <a href="#reviews">Отзывы</a>
     <a href="#faq">ЧаВо</a>
     <a href="#contact-form">Заявка</a>
-    <a href="tel:+380756177719" style="color:#15803d;">📞 Позвонить</a>
+    <a href="tel:+380756177719" style="color:#0284c9;">📞 Позвонить</a>
+</div>
+
+<!-- Мобильные две кнопки: звонок + заявка (удобно) -->
+<div class="mobile-buttons">
+    <a href="tel:+380756177719" class="btn-call">📞 Позвонить</a>
+    <a href="#contact-form" class="btn-order">📝 Заявка</a>
 </div>
 
 <main>
-    <!-- Герой -->
+    <!-- Герой с сантехническим ключом SVG вместо галочки -->
     <section id="hero" class="hero">
         <div class="container hero-grid">
             <div class="hero-content">
@@ -489,12 +547,14 @@
                 </div>
             </div>
             <div class="hero-img">
-                <svg width="220" height="220" viewBox="0 0 100 100" fill="none">
-                    <circle cx="50" cy="50" r="45" fill="#e9f5eb"/>
-                    <path d="M32 48 L42 58 L68 32" stroke="#15803d" stroke-width="6" stroke-linecap="round"/>
-                    <rect x="30" y="60" width="40" height="12" rx="4" fill="#2b9348"/>
-                    <circle cx="38" cy="66" r="3" fill="#fff"/>
-                    <circle cx="62" cy="66" r="3" fill="#fff"/>
+                <!-- SVG сантехнический ключ (разводной ключ) вместо галочки -->
+                <svg width="200" height="200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="46" fill="#d9ebfa" stroke="#0284c9" stroke-width="1.5"/>
+                    <path d="M38 44 L58 28 L72 42 L56 64 L42 60 L38 44Z" fill="#eef5fc" stroke="#0284c9" stroke-width="2" stroke-linejoin="round"/>
+                    <rect x="44" y="60" width="22" height="8" rx="3" fill="#0284c9" transform="rotate(-15 50 64)"/>
+                    <circle cx="52" cy="44" r="5" fill="#0284c9" stroke="white" stroke-width="1.5"/>
+                    <path d="M62 32 L70 24" stroke="#0284c9" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M46 60 L40 70" stroke="#0284c9" stroke-width="3" stroke-linecap="round"/>
                 </svg>
             </div>
         </div>
@@ -516,7 +576,7 @@
     </section>
 
     <!-- Галерея -->
-    <section id="gallery" style="background:#f1f5f9;">
+    <section id="gallery" style="background:#eef5fc;">
         <div class="container">
             <h2 class="section-title">Фото работ</h2>
             <div class="gallery-grid" id="galleryGrid"></div>
@@ -549,7 +609,7 @@
     </section>
 
     <!-- ЧаВо -->
-    <section id="faq" style="background:#f8fafc;">
+    <section id="faq" style="background:#f4f9ff;">
         <div class="container">
             <h2 class="section-title">Часто задаваемые вопросы</h2>
             <div class="faq-grid" id="faqContainer">
@@ -561,7 +621,7 @@
         </div>
     </section>
 
-    <!-- Форма с отправкой на PHP (Telegram) -->
+    <!-- Форма отправки на PHP (Telegram) -->
     <section id="contact-form">
         <div class="container">
             <h2 class="section-title">Оставить заявку</h2>
@@ -590,8 +650,8 @@
     </div>
 </footer>
 
-<!-- Плавающая кнопка -->
-<a href="tel:+380756177719" class="floating-phone" aria-label="Позвонить">
+<!-- Плавающая зеленая кнопка звонка (остается зелёной) -->
+<a href="tel:+380756177719" class="floating-phone" aria-label="Позвонить сантехнику">
     <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
     </svg>
@@ -606,18 +666,18 @@
     const galleryDiv = document.getElementById('galleryGrid');
     if(galleryDiv) galleryImgs.forEach(url => { let div = document.createElement('div'); div.className='gallery-item'; div.style.backgroundImage=`url(${url})`; galleryDiv.appendChild(div); });
 
-    // Отзывы (реальные данные)
+    // Отзывы
     const reviews = [
         { name: "Андрей К.", avatar: "👨", stars: 5, text: "Отличный мастер! Заменил стояк за 2 часа, чисто и аккуратно. Рекомендую!" },
-        { name: "Елена П.", avatar: "👩", stars: 5, text: "Оперативно приехал, устранил засор, дал гарантию. Спасибо, буду обращаться еще." },
-        { name: "Сергей М.", avatar: "👨", stars: 5, text: "Установил унитаз и смеситель, всё на высшем уровне. Цена адекватная. 5 баллов." },
-        { name: "Татьяна В.", avatar: "👩", stars: 4.5, text: "Вежливый, быстрый. Поменял трубы на кухне, теперь всё отлично течёт." }
+        { name: "Елена П.", avatar: "👩", stars: 5, text: "Оперативно приехал, устранил засор, дал гарантию. Спасибо!" },
+        { name: "Сергей М.", avatar: "👨", stars: 5, text: "Установил унитаз и смеситель, всё на высшем уровне. Цена адекватная." },
+        { name: "Татьяна В.", avatar: "👩", stars: 4.5, text: "Вежливый, быстрый. Поменял трубы на кухне, теперь всё отлично." }
     ];
     const reviewsContainer = document.getElementById('reviewsContainer');
     if(reviewsContainer) {
         reviews.forEach(r => {
-            const starsFull = Math.floor(r.stars);
-            let starHtml = "★".repeat(starsFull) + (r.stars % 1 ? "½" : "") + "☆".repeat(5 - Math.ceil(r.stars));
+            const full = Math.floor(r.stars);
+            let starHtml = "★".repeat(full) + (r.stars % 1 ? "½" : "") + "☆".repeat(5 - Math.ceil(r.stars));
             const card = document.createElement('div');
             card.className = 'review-card';
             card.innerHTML = `
@@ -636,47 +696,32 @@
         item.addEventListener('click', () => item.classList.toggle('active'));
     });
 
-    // Мобильное меню гамбургер
+    // Бургер меню
     const burger = document.getElementById('burgerBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
-    function closeMenu() {
-        mobileMenu.classList.remove('open');
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    function openMenu() {
-        mobileMenu.classList.add('open');
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    burger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (mobileMenu.classList.contains('open')) closeMenu();
-        else openMenu();
-    });
+    function closeMenu() { mobileMenu.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+    function openMenu() { mobileMenu.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    burger.addEventListener('click', (e) => { e.stopPropagation(); if (mobileMenu.classList.contains('open')) closeMenu(); else openMenu(); });
     overlay.addEventListener('click', closeMenu);
     document.querySelectorAll('.mobile-menu a').forEach(link => link.addEventListener('click', closeMenu));
 
-    // Обработка формы через PHP: стандартный submit, но добавим AJAX чтобы не перезагружать страницу?
+    // Форма (AJAX на PHP)
     const form = document.getElementById('tgForm');
     const statusDiv = document.getElementById('formStatus');
     if(form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
-            statusDiv.innerText = '⏳ Отправка...';
+            statusDiv.innerHTML = '⏳ Отправка...';
             try {
-                const response = await fetch('send-telegram.php', {
-                    method: 'POST',
-                    body: formData
-                });
+                const response = await fetch('send-telegram.php', { method: 'POST', body: formData });
                 const result = await response.text();
                 if(response.ok && result.includes('успешно')) {
                     statusDiv.innerHTML = '✅ Заявка отправлена! Мы свяжемся с вами.';
                     form.reset();
                 } else {
-                    statusDiv.innerHTML = '❌ Ошибка, попробуйте позвонить по телефону.';
+                    statusDiv.innerHTML = '❌ Ошибка, попробуйте позвонить.';
                 }
             } catch(err) {
                 statusDiv.innerHTML = '❌ Ошибка соединения. Позвоните нам.';
@@ -684,6 +729,5 @@
         });
     }
 </script>
-
 </body>
 </html>
