@@ -14,7 +14,7 @@
     <meta property="og:description" content="Любые сантехнические работы. Качественно, чисто, с гарантией.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://santehnik-nikolaev.pp.ua">
-    <!-- Favicon светло-синий -->
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230285c9'%3E%3Cpath d='M20 14.5v-2a1 1 0 0 0-1-1h-1.3l-1.9-3.8A3 3 0 0 0 12.2 6H8v2h4.2a1 1 0 0 1 .9.6L14.5 12H5a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.2l.5 2a2 2 0 0 0 2 1.5h7a2 2 0 0 0 1.8-1.2l.8-1.8h.7a1 1 0 0 0 1-1v-2zM8 18a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z'/%3E%3C/svg%3E">
     <style>
         * {
@@ -399,51 +399,16 @@
             padding-top: 24px;
             border-top: 1px solid #2c5a7a;
         }
-        /* Плавающая зеленая кнопка звонка (остается зеленой, как просили) */
-        .floating-phone {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
-            background-color: #22c55e;
-            width: 68px;
-            height: 68px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 12px 20px rgba(34,197,94,0.4);
-            cursor: pointer;
-            transition: all 0.2s;
-            z-index: 1000;
-            animation: pulseGlow 1.8s infinite;
-            border: none;
-        }
-        .floating-phone:hover {
-            transform: scale(1.08);
-            background-color: #16a34a;
-        }
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
-            70% { box-shadow: 0 0 0 14px rgba(34,197,94,0); }
-            100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
-        }
-        .floating-phone svg {
-            width: 36px;
-            height: 36px;
-            stroke: white;
-            stroke-width: 1.8;
-            fill: none;
-        }
-        /* Мобильные две кнопки (звонок + заявка) */
+        /* Мобильные две плавающие кнопки (зеленая Позвонить + синяя Заявка) */
         .mobile-buttons {
             display: none;
             position: fixed;
-            bottom: 20px;
+            bottom: 24px;
             left: 0;
             right: 0;
             padding: 0 20px;
             gap: 16px;
-            z-index: 999;
+            z-index: 1000;
             justify-content: center;
         }
         .mobile-buttons .btn-call,
@@ -455,31 +420,31 @@
             font-weight: 700;
             font-size: 1rem;
             text-decoration: none;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(4px);
             transition: 0.2s;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
         }
         .mobile-buttons .btn-call {
             background: #22c55e;
             color: white;
-            box-shadow: 0 4px 14px rgba(34,197,94,0.4);
             border: none;
         }
         .mobile-buttons .btn-order {
             background: #0284c9;
             color: white;
-            box-shadow: 0 4px 12px rgba(2,132,201,0.4);
         }
+        /* Адаптив: на мобильных показываем плавающие две кнопки и скрываем десктопную кнопку "Заявка" в герое */
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2.2rem; }
             .nav-links { display: none; }
             .burger { display: flex; }
             .hero-stats { gap: 12px; flex-wrap: wrap; }
             .btn-outline { display: none; }
+            /* Скрываем кнопку "Оставить заявку" в мобильной версии героя */
+            .hero-content .btn:first-of-type {
+                display: none;
+            }
             .container { padding: 0 18px; }
-            /* на мобильных плавающая зеленая кнопка меньше, но не конфликтует */
-            .floating-phone { width: 56px; height: 56px; bottom: 100px; right: 20px; }
-            .floating-phone svg { width: 28px; height: 28px; }
-            /* показываем две кнопки внизу */
             .mobile-buttons {
                 display: flex;
             }
@@ -523,14 +488,14 @@
     <a href="tel:+380756177719" style="color:#0284c9;">📞 Позвонить</a>
 </div>
 
-<!-- Мобильные две кнопки: звонок + заявка (удобно) -->
+<!-- Мобильные две плавающие кнопки: позвонить + заявка -->
 <div class="mobile-buttons">
     <a href="tel:+380756177719" class="btn-call">📞 Позвонить</a>
     <a href="#contact-form" class="btn-order">📝 Заявка</a>
 </div>
 
 <main>
-    <!-- Герой с сантехническим ключом SVG вместо галочки -->
+    <!-- Герой с обычным гаечным ключом SVG (без кружков и прочего) -->
     <section id="hero" class="hero">
         <div class="container hero-grid">
             <div class="hero-content">
@@ -547,14 +512,18 @@
                 </div>
             </div>
             <div class="hero-img">
-                <!-- SVG сантехнический ключ (разводной ключ) вместо галочки -->
+                <!-- Обычный гаечный ключ SVG (без лишних деталей) -->
                 <svg width="200" height="200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="46" fill="#d9ebfa" stroke="#0284c9" stroke-width="1.5"/>
-                    <path d="M38 44 L58 28 L72 42 L56 64 L42 60 L38 44Z" fill="#eef5fc" stroke="#0284c9" stroke-width="2" stroke-linejoin="round"/>
-                    <rect x="44" y="60" width="22" height="8" rx="3" fill="#0284c9" transform="rotate(-15 50 64)"/>
-                    <circle cx="52" cy="44" r="5" fill="#0284c9" stroke="white" stroke-width="1.5"/>
-                    <path d="M62 32 L70 24" stroke="#0284c9" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M46 60 L40 70" stroke="#0284c9" stroke-width="3" stroke-linecap="round"/>
+                    <g transform="rotate(25 50 50)">
+                        <!-- Головка ключа (кольцо) -->
+                        <circle cx="38" cy="38" r="16" stroke="#0284c9" stroke-width="5" fill="none"/>
+                        <circle cx="38" cy="38" r="8" fill="#0284c9"/>
+                        <!-- Рукоятка -->
+                        <rect x="48" y="20" width="12" height="48" rx="4" fill="#0284c9"/>
+                        <!-- Зев ключа (рожковый) -->
+                        <path d="M62 28 L78 28 L82 38 L62 44 Z" fill="#0284c9" stroke="#0284c9" stroke-width="2"/>
+                        <rect x="66" y="32" width="12" height="8" fill="#f4f9ff"/>
+                    </g>
                 </svg>
             </div>
         </div>
@@ -650,13 +619,6 @@
     </div>
 </footer>
 
-<!-- Плавающая зеленая кнопка звонка (остается зелёной) -->
-<a href="tel:+380756177719" class="floating-phone" aria-label="Позвонить сантехнику">
-    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-    </svg>
-</a>
-
 <script>
     // Галерея
     const galleryImgs = [
@@ -706,7 +668,7 @@
     overlay.addEventListener('click', closeMenu);
     document.querySelectorAll('.mobile-menu a').forEach(link => link.addEventListener('click', closeMenu));
 
-    // Форма (AJAX на PHP)
+    // Форма AJAX на PHP
     const form = document.getElementById('tgForm');
     const statusDiv = document.getElementById('formStatus');
     if(form) {
