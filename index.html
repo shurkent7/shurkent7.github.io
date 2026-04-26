@@ -351,7 +351,7 @@
             max-height: 200px;
         }
 
-        /* ========== НОВЫЕ ИНФОРМАЦИОННЫЕ СЕКЦИИ (СВЕТЛО-СИНЯЯ ТЕМА) ========== */
+        /* ========== НОВЫЕ ИНФОРМАЦИОННЫЕ СЕКЦИИ (ЗАГОЛОВКИ ПО ЦЕНТРУ) ========== */
         .info-section {
             padding: 60px 0;
             border-bottom: 1px solid #e2edf7;
@@ -359,14 +359,17 @@
         .info-section:last-child {
             border-bottom: none;
         }
-        .section-header {
+        /* Заголовок секции — центрируем и на десктопе, и на мобильных */
+        .info-section .section-header {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 16px;
+            justify-content: center;
+            text-align: center;
             margin-bottom: 40px;
-            flex-wrap: wrap;
+            gap: 16px;
         }
-        .section-icon {
+        .info-section .section-icon {
             font-size: 3rem;
             background: #d9ebfa;
             width: 80px;
@@ -376,21 +379,24 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 12px 24px -12px rgba(2,132,201,0.12);
+            margin: 0 auto;
         }
-        .info-title {
+        .info-section .info-title {
             font-size: 2rem;
             font-weight: 700;
             color: #0a2540;
             position: relative;
+            display: inline-block;
+            text-align: center;
         }
-        .info-title:after {
+        .info-section .info-title:after {
             content: '';
             display: block;
-            width: 60px;
+            width: 70px;
             height: 4px;
             background: #0284c9;
             border-radius: 4px;
-            margin-top: 10px;
+            margin: 12px auto 0;
         }
         .cards-grid {
             display: grid;
@@ -519,10 +525,10 @@
             .info-section {
                 padding: 45px 0;
             }
-            .info-title {
+            .info-section .info-title {
                 font-size: 1.6rem;
             }
-            .section-icon {
+            .info-section .section-icon {
                 width: 65px;
                 height: 65px;
                 font-size: 2.2rem;
@@ -769,7 +775,7 @@
         </div>
     </section>
 
-    <!-- === НОВЫЕ ИНФОРМАЦИОННЫЕ СЕКЦИИ (ВСТАВЛЕНЫ ПО ТЕКСТАМ) === -->
+    <!-- === НОВЫЕ ИНФОРМАЦИОННЫЕ СЕКЦИИ (ЗАГОЛОВКИ ПО ЦЕНТРУ) === -->
     <div class="container" id="info">
         <!-- 1. Кому подойдут наши услуги -->
         <section class="info-section">
