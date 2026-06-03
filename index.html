@@ -523,20 +523,28 @@
             .callback-form {
                 flex-direction: column;
             }
-            .phone-field,
-            .callback-form button {
+            .phone-field {
                 width: 100%;
-                height: 64px;
+                height: 74px;
+                border-radius: 22px;
             }
             .callback-form input {
-                font-size: 1.45rem;
+                font-size: 1.65rem;
+                padding: 0 16px;
+                letter-spacing: 1px;
+            }
+            .callback-form input::placeholder {
+                font-size: 1.35rem;
             }
             .phone-prefix {
-                font-size: 1.35rem;
-                padding: 0 14px;
+                font-size: 1.5rem;
+                padding: 0 18px;
             }
             .callback-form button {
-                font-size: 1.15rem;
+                width: 100%;
+                height: 68px;
+                border-radius: 22px;
+                font-size: 1.22rem;
             }
             .toast {
                 bottom: 96px;
@@ -762,15 +770,16 @@
                             name="phone_digits"
                             inputmode="numeric"
                             autocomplete="tel-national"
-                            maxlength="11"
+                            maxlength="12"
+                            pattern="[0-9 ]*"
                             required
                             aria-label="9 цифр номера после +380"
-                            placeholder="__ ___ __ __">
+                            placeholder="75 617 77 19">
                     </label>
                     <button type="submit" id="submitBtn">☎️ Заказать звонок</button>
                 </form>
 
-                <div class="form-note">Введите только 9 цифр после +380. Например: 756177719</div>
+                <div class="form-note">Введите 9 цифр после +380. Можно без пробелов: 756177719</div>
             </div>
         </div>
     </section>
@@ -839,7 +848,7 @@
     document.querySelectorAll('.mobile-menu a').forEach(link => link.addEventListener('click', closeMenu));
 
     // ========== ФОРМА ЗАЯВКИ ==========
-    const FORM_ENDPOINT = "https://eksk.com.ua/send-pp.php";
+    const FORM_ENDPOINT = "https://santehnik-kr.pp.ua/callback.php";
 
     const formBlock = document.getElementById("formBlock");
     const callbackForm = document.getElementById("callbackForm");
@@ -939,6 +948,13 @@
             setCursorToEnd(phoneInput);
             setTimeout(ensureSubmitVisible, 300);
             setTimeout(ensureSubmitVisible, 700);
+        });
+
+        phoneInput.addEventListener("beforeinput", (e) => {
+            // На мобильных не даем полю переполниться: максимум 9 реальных цифр, пробелы не считаются.
+            if (e.inputType === "insertText" && /\d/.test(e.data || "")) {
+                if (digitsOnly(phoneInput.value).length >= 9) e.preventDefault();
+            }
         });
 
         phoneInput.addEventListener("input", () => {
