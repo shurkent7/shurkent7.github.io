@@ -370,6 +370,142 @@
   animation: highlightPulse 0.8s ease-out;
   border-color: #229ED9 !important;
 }
+
+        /* Красивая форма заявки */
+        .callback-section {
+            padding: 70px 0 90px;
+            background: linear-gradient(135deg, #e7f5ff 0%, #ffffff 100%);
+        }
+        .callback-card {
+            max-width: 620px;
+            margin: 0 auto;
+            padding: 28px;
+            border-radius: 32px;
+            background: #ffffff;
+            border: 1px solid #c9e7fb;
+            box-shadow: 0 18px 45px rgba(2, 132, 201, 0.14);
+            scroll-margin-top: 110px;
+        }
+        .callback-title {
+            display: block;
+            margin-bottom: 10px;
+            color: #0a2540;
+            font-size: 1.65rem;
+            line-height: 1.2;
+            font-weight: 800;
+            text-align: center;
+        }
+        .callback-subtitle {
+            margin-bottom: 20px;
+            color: #2c5a7a;
+            text-align: center;
+            font-size: 1rem;
+        }
+        .callback-form {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        .callback-form input {
+            flex: 1;
+            min-width: 0;
+            height: 58px;
+            padding: 0 18px;
+            border-radius: 18px;
+            border: 2px solid #b8dcf5;
+            background: #f8fcff;
+            color: #0a2540;
+            font-size: 1.15rem;
+            font-weight: 700;
+            outline: none;
+            transition: 0.2s;
+        }
+        .callback-form input:focus {
+            border-color: #0284c9;
+            box-shadow: 0 0 0 5px rgba(2, 132, 201, 0.12);
+            background: #ffffff;
+        }
+        .callback-form button {
+            height: 58px;
+            padding: 0 22px;
+            border: 0;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #0284c9, #006aa8);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 10px 24px rgba(2, 132, 201, 0.22);
+            transition: 0.2s;
+        }
+        .callback-form button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 28px rgba(2, 132, 201, 0.26);
+        }
+        .callback-form button:disabled {
+            opacity: 0.7;
+            cursor: wait;
+            transform: none;
+        }
+        .form-note {
+            margin-top: 12px;
+            color: #5b7890;
+            font-size: 0.92rem;
+            text-align: center;
+        }
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 92px;
+            transform: translateX(-50%) translateY(20px);
+            min-width: 280px;
+            max-width: calc(100% - 32px);
+            padding: 14px 18px;
+            border-radius: 18px;
+            color: #ffffff;
+            font-weight: 700;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 3000;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.22);
+            transition: 0.25s ease;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast.success { background: #16a34a; }
+        .toast.error { background: #dc2626; }
+        .toast.info { background: #0284c9; }
+
+        @media (max-width: 768px) {
+            .callback-section {
+                padding: 48px 0 120px;
+            }
+            .callback-card {
+                padding: 22px 16px;
+                border-radius: 26px;
+                scroll-margin-top: 85px;
+            }
+            .callback-title {
+                font-size: 1.35rem;
+            }
+            .callback-form {
+                flex-direction: column;
+            }
+            .callback-form input,
+            .callback-form button {
+                width: 100%;
+                height: 56px;
+                font-size: 1.08rem;
+            }
+            .toast {
+                bottom: 96px;
+            }
+        }
+
         /* Футер */
         .footer {
             background: #0a2a44;
@@ -573,14 +709,33 @@
         </div>
     </section>
 
-   <!-- Блок формы с уникальным id и классом для центрирования -->
-<div class="block form-container" id="formBlock">
-<b style="color:#dc2f02; font-size:19px; background:linear-gradient(135deg, #fff5f5, #fff); padding:8px 12px; border-radius:30px; display:inline-block; box-shadow:0 2px 8px rgba(220,47,2,0.2);">💬 Оставьте номер — перезвоню через 2 минуты</b>  
-<form id="callbackForm">
-<input type="tel" id="phone" value="+380" required placeholder="+380XXXXXXXXX">
-<button type="submit" id="submitBtn">☎️ Заказать звонок</button>
-</form>
-</div>
+    <!-- Форма заявки -->
+    <section id="contact-form" class="callback-section">
+        <div class="container">
+            <div class="callback-card form-container" id="formBlock">
+                <strong class="callback-title">💬 Оставьте номер — перезвоню через 2 минуты</strong>
+                <p class="callback-subtitle">Без посредников. Уточню проблему, цену и ближайшее время выезда.</p>
+
+                <form id="callbackForm" class="callback-form" novalidate>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value="+380"
+                        inputmode="tel"
+                        autocomplete="tel"
+                        required
+                        aria-label="Номер телефона"
+                        placeholder="+380XXXXXXXXX">
+                    <button type="submit" id="submitBtn">☎️ Заказать звонок</button>
+                </form>
+
+                <div class="form-note">Формат номера: +380XXXXXXXXX</div>
+            </div>
+        </div>
+    </section>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </main>
 
 <footer class="footer">
@@ -643,164 +798,171 @@
     overlay.addEventListener('click', closeMenu);
     document.querySelectorAll('.mobile-menu a').forEach(link => link.addEventListener('click', closeMenu));
 
-    // ========== ИСПРАВЛЕННАЯ ФОРМА ==========
- function showToast(text, type="success"){
-  const toast = document.getElementById("toast");
-  toast.innerText = text;
-  toast.className = "toast show " + type;
+    // ========== ФОРМА ЗАЯВКИ ==========
+    const FORM_ENDPOINT = "https://santehnik-kr.pp.ua/callback.php";
 
-  setTimeout(()=>{
-    toast.className = "toast";
-  }, 4000);
-}
+    const formBlock = document.getElementById("formBlock");
+    const callbackForm = document.getElementById("callbackForm");
+    const phoneInput = document.getElementById("phone");
+    const submitBtn = document.getElementById("submitBtn");
 
-function setCursorAfterPrefix(phoneInput) {
-  if (phoneInput.value.startsWith('+380')) {
-    phoneInput.setSelectionRange(4, 4);
-  } else {
-    phoneInput.setSelectionRange(phoneInput.value.length, phoneInput.value.length);
-  }
-}
+    function showToast(text, type = "success") {
+        let toast = document.getElementById("toast");
+        if (!toast) {
+            toast = document.createElement("div");
+            toast.id = "toast";
+            toast.className = "toast";
+            toast.setAttribute("role", "status");
+            toast.setAttribute("aria-live", "polite");
+            document.body.appendChild(toast);
+        }
 
-// ========== ОСНОВНОЕ РЕШЕНИЕ ДЛЯ КЛАВИАТУРЫ ==========
-// Функция, которая проверяет видна ли кнопка и прокручивает если нужно
-function ensureButtonIsVisible() {
-  const submitBtn = document.getElementById('submitBtn');
-  if (!submitBtn) return false;
-  
-  // Получаем реальную высоту viewport (с учетом клавиатуры)
-  const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-  const btnRect = submitBtn.getBoundingClientRect();
-  
-  // Если кнопка ниже видимой области или перекрыта
-  if (btnRect.bottom > viewportHeight - 20) {
-    const currentScroll = window.pageYOffset;
-    const scrollNeeded = btnRect.bottom - viewportHeight + 40;
-    window.scrollTo({
-      top: currentScroll + scrollNeeded,
-      behavior: 'smooth'
+        toast.textContent = text;
+        toast.className = "toast show " + type;
+
+        clearTimeout(window.__toastTimer);
+        window.__toastTimer = setTimeout(() => {
+            toast.className = "toast";
+        }, 4200);
+    }
+
+    function normalizePhoneValue(value) {
+        let digits = String(value || "").replace(/\D/g, "");
+
+        if (digits.startsWith("380")) {
+            digits = digits.slice(3);
+        } else if (digits.startsWith("80")) {
+            digits = digits.slice(2);
+        } else if (digits.startsWith("0")) {
+            digits = digits.slice(1);
+        }
+
+        digits = digits.slice(0, 9);
+        return "+380" + digits;
+    }
+
+    function setCursorToEnd(input) {
+        requestAnimationFrame(() => {
+            const end = input.value.length;
+            input.setSelectionRange(end, end);
+        });
+    }
+
+    function scrollToFormAndFocus() {
+        if (!formBlock || !phoneInput) return;
+
+        const top = formBlock.getBoundingClientRect().top + window.pageYOffset - 90;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+
+        setTimeout(() => {
+            phoneInput.focus({ preventScroll: true });
+            setCursorToEnd(phoneInput);
+            phoneInput.classList.add("highlight-input");
+            setTimeout(() => phoneInput.classList.remove("highlight-input"), 900);
+            ensureSubmitVisible();
+        }, 350);
+    }
+
+    function ensureSubmitVisible() {
+        if (!submitBtn) return;
+
+        const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+        const rect = submitBtn.getBoundingClientRect();
+
+        if (rect.bottom > viewportHeight - 18) {
+            window.scrollBy({
+                top: rect.bottom - viewportHeight + 35,
+                behavior: "smooth"
+            });
+        }
+    }
+
+    document.querySelectorAll('a[href="#contact-form"], a[href="#formBlock"], a[href="#form"]').forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            scrollToFormAndFocus();
+        });
     });
-    return true;
-  }
-  return false;
-}
 
-// Главная функция прокрутки к форме
-function scrollToFormAndFocus() {
-  const formElement = document.getElementById('formBlock');
-  const phoneInput = document.getElementById('phone');
-  const submitBtn = document.getElementById('submitBtn');
-  
-  if (!formElement) return;
-  
-  // Прокручиваем к форме, чтобы форма была в верхней части экрана
-  const elementRect = formElement.getBoundingClientRect();
-  const absoluteElementTop = elementRect.top + window.pageYOffset;
-  const scrollToPosition = Math.max(0, absoluteElementTop - 80);
-  
-  window.scrollTo({
-    top: scrollToPosition,
-    behavior: 'smooth'
-  });
-  
-  // Фокусируем поле после прокрутки
-  setTimeout(() => {
     if (phoneInput) {
-      phoneInput.focus();
-      setCursorAfterPrefix(phoneInput);
-      phoneInput.classList.add('highlight-input');
-      setTimeout(() => {
-        phoneInput.classList.remove('highlight-input');
-      }, 800);
+        phoneInput.addEventListener("focus", () => {
+            if (!phoneInput.value || phoneInput.value === "+") phoneInput.value = "+380";
+            setCursorToEnd(phoneInput);
+            setTimeout(ensureSubmitVisible, 300);
+            setTimeout(ensureSubmitVisible, 700);
+        });
+
+        phoneInput.addEventListener("input", () => {
+            const normalized = normalizePhoneValue(phoneInput.value);
+            if (phoneInput.value !== normalized) {
+                phoneInput.value = normalized;
+            }
+            setCursorToEnd(phoneInput);
+        });
+
+        phoneInput.addEventListener("keydown", (e) => {
+            const protectedPrefix = phoneInput.selectionStart <= 4 && ["Backspace", "Delete"].includes(e.key);
+            if (protectedPrefix) e.preventDefault();
+        });
     }
-  }, 300);
-  
-  // Проверяем видимость кнопки после появления клавиатуры (с задержками)
-  setTimeout(() => ensureButtonIsVisible(), 500);
-  setTimeout(() => ensureButtonIsVisible(), 800);
-  setTimeout(() => ensureButtonIsVisible(), 1100);
-  
-  // Отслеживаем изменения размера viewport (когда клавиатура появляется)
-  if (window.visualViewport) {
-    const handleResize = () => {
-      ensureButtonIsVisible();
-    };
-    window.visualViewport.addEventListener('resize', handleResize);
-    // Отписываемся через 2 секунды
-    setTimeout(() => {
-      window.visualViewport.removeEventListener('resize', handleResize);
-    }, 2000);
-  }
-}
 
-// Обработчик для кнопки "Заявка" в footer
-const scrollBtn = document.getElementById('scrollToFormBtn');
-if (scrollBtn) {
-  scrollBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    scrollToFormAndFocus();
-  });
-}
-
-// Обработчик для ссылок на форму
-document.querySelectorAll('a[href="#form"], a[href="#formBlock"]').forEach(link => {
-  link.addEventListener('click', function(e) {
-    e.preventDefault();
-    scrollToFormAndFocus();
-  });
-});
-
-// Обработчик фокуса на поле ввода (если пользователь сам кликнул)
-const phoneInputField = document.getElementById('phone');
-if (phoneInputField) {
-  phoneInputField.addEventListener('focus', function() {
-    setTimeout(() => ensureButtonIsVisible(), 300);
-    setTimeout(() => ensureButtonIsVisible(), 600);
-  });
-}
-
-// Обработчик изменения размера окна (поворот экрана)
-window.addEventListener('resize', function() {
-  if (document.activeElement === phoneInputField) {
-    setTimeout(() => ensureButtonIsVisible(), 100);
-  }
-});
-
-// Обработка отправки формы
-document.getElementById("callbackForm").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  const phone = document.getElementById("phone").value.trim();
-  const regex = /^\+380\d{9}$/;
-
-  if(!regex.test(phone)){
-    showToast("Введите номер в формате +380XXXXXXXXX", "error");
-    return;
-  }
-
-  fetch("https://santehnik-kr.pp.ua/callback.php", {
-    method: "POST",
-    headers: {"Content-Type": "application/x-www-form-urlencoded"},
-    body: "phone=" + encodeURIComponent(phone)
-  })
-  .then(res => res.text())
-  .then(text => {
-    try {
-      const data = JSON.parse(text);
-      showToast(data.message, data.status);
-      if(data.status === "success"){
-        document.getElementById("phone").value = "+380";
-      }
-    } catch(e){
-      showToast("✅ Заявка отправлена! Сейчас перезвоню", "success");
-      document.getElementById("phone").value = "+380";
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", () => {
+            if (document.activeElement === phoneInput) setTimeout(ensureSubmitVisible, 100);
+        });
     }
-  })
-  .catch(()=>{
-    showToast("✅ Заявка принята! Позвоню в ближайшее время", "success");
-    document.getElementById("phone").value = "+380";
-  });
-});
+
+    if (callbackForm) {
+        callbackForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const phone = normalizePhoneValue(phoneInput.value);
+            phoneInput.value = phone;
+
+            if (!/^\+380\d{9}$/.test(phone)) {
+                showToast("Введите номер в формате +380XXXXXXXXX", "error");
+                phoneInput.focus();
+                setCursorToEnd(phoneInput);
+                return;
+            }
+
+            submitBtn.disabled = true;
+            const oldText = submitBtn.textContent;
+            submitBtn.textContent = "Отправляю...";
+
+            fetch(FORM_ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+                body: "phone=" + encodeURIComponent(phone)
+            })
+            .then(async (res) => {
+                const text = await res.text();
+                try {
+                    return JSON.parse(text);
+                } catch {
+                    return {
+                        status: res.ok ? "success" : "error",
+                        message: res.ok ? "✅ Заявка отправлена! Сейчас перезвоню" : "Ошибка отправки. Позвоните: 075 617 77 19"
+                    };
+                }
+            })
+            .then((data) => {
+                const status = data.status === "success" ? "success" : "error";
+                showToast(data.message || "✅ Заявка отправлена! Сейчас перезвоню", status);
+
+                if (status === "success") {
+                    phoneInput.value = "+380";
+                }
+            })
+            .catch(() => {
+                showToast("Не удалось отправить. Позвоните: 075 617 77 19", "error");
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = oldText;
+            });
+        });
+    }
 </script>
 </body>
 </html>
