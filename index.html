@@ -774,12 +774,12 @@
                             pattern="[0-9 ]*"
                             required
                             aria-label="9 цифр номера после +380"
-                            placeholder="75 617 77 19">
+                            placeholder="0000000">
                     </label>
                     <button type="submit" id="submitBtn">☎️ Заказать звонок</button>
                 </form>
 
-                <div class="form-note">Введите 9 цифр после +380. Можно без пробелов: 756177719</div>
+                <div class="form-note">Введите 9 цифр после +380. Можно без пробелов</div>
             </div>
         </div>
     </section>
@@ -848,7 +848,7 @@
     document.querySelectorAll('.mobile-menu a').forEach(link => link.addEventListener('click', closeMenu));
 
     // ========== ФОРМА ЗАЯВКИ ==========
-    const FORM_ENDPOINT = "https://santehnik-kr.pp.ua/callback.php";
+    const FORM_ENDPOINT = "https://eksk.com.ua/send-pp.php";
 
     const formBlock = document.getElementById("formBlock");
     const callbackForm = document.getElementById("callbackForm");
