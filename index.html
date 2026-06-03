@@ -510,44 +510,62 @@
 
         @media (max-width: 768px) {
             .callback-section {
-                padding: 48px 0 120px;
+                padding: 36px 0 120px;
             }
             .callback-card {
-                padding: 22px 16px;
-                border-radius: 26px;
-                scroll-margin-top: 85px;
+                padding: 24px 14px;
+                border-radius: 28px;
+                scroll-margin-top: 72px;
             }
             .callback-title {
-                font-size: 1.35rem;
+                font-size: 1.32rem;
+            }
+            .callback-subtitle {
+                font-size: 0.96rem;
+                margin-bottom: 16px;
             }
             .callback-form {
                 flex-direction: column;
+                gap: 14px;
             }
             .phone-field {
                 width: 100%;
-                height: 74px;
-                border-radius: 22px;
-            }
-            .callback-form input {
-                font-size: 1.65rem;
-                padding: 0 16px;
-                letter-spacing: 1px;
-            }
-            .callback-form input::placeholder {
-                font-size: 1.35rem;
+                height: 88px;
+                border-radius: 26px;
+                overflow: visible;
+                align-items: stretch;
             }
             .phone-prefix {
-                font-size: 1.5rem;
-                padding: 0 18px;
+                min-width: 90px;
+                justify-content: center;
+                font-size: 1.42rem;
+                padding: 0 12px;
+                border-radius: 24px 0 0 24px;
+            }
+            .callback-form input {
+                width: 100%;
+                min-width: 0;
+                font-size: clamp(1.42rem, 7vw, 1.85rem);
+                line-height: 1;
+                padding: 0 10px;
+                letter-spacing: 0;
+                text-align: left;
+                font-variant-numeric: tabular-nums;
+            }
+            .callback-form input::placeholder {
+                font-size: clamp(1.18rem, 5.5vw, 1.5rem);
             }
             .callback-form button {
                 width: 100%;
-                height: 68px;
-                border-radius: 22px;
-                font-size: 1.22rem;
+                height: 74px;
+                border-radius: 24px;
+                font-size: 1.24rem;
+            }
+            .form-note {
+                font-size: 0.88rem;
             }
             .toast {
-                bottom: 96px;
+                bottom: 24px;
             }
         }
 
@@ -602,6 +620,10 @@
         .mobile-buttons .btn-order {
             background: #0284c9;
             color: white;
+        }
+
+        .mobile-buttons.form-open {
+            display: none !important;
         }
         /* Адаптив: на мобильных показываем плавающие две кнопки и скрываем десктопную кнопку "Заявка" в герое */
         @media (max-width: 768px) {
@@ -854,6 +876,7 @@
     const callbackForm = document.getElementById("callbackForm");
     const phoneInput = document.getElementById("phone");
     const submitBtn = document.getElementById("submitBtn");
+    const mobileButtons = document.querySelector(".mobile-buttons");
 
     function showToast(text, type = "success") {
         let toast = document.getElementById("toast");
@@ -907,18 +930,43 @@
         });
     }
 
+    function hideMobileButtons() {
+        if (mobileButtons) mobileButtons.classList.add("form-open");
+    }
+
+    function showMobileButtonsIfAwayFromForm() {
+        if (!mobileButtons || !formBlock) return;
+        const rect = formBlock.getBoundingClientRect();
+        const formVisible = rect.top < window.innerHeight * 0.8 && rect.bottom > 80;
+        if (!formVisible) mobileButtons.classList.remove("form-open");
+    }
+
     function scrollToFormAndFocus() {
         if (!formBlock || !phoneInput) return;
 
-        const top = formBlock.getBoundingClientRect().top + window.pageYOffset - 90;
-        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+        hideMobileButtons();
+
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        const rect = formBlock.getBoundingClientRect();
+        const absoluteTop = rect.top + window.pageYOffset;
+        let targetTop;
+
+        if (isMobile) {
+            // На мобильном поднимаем форму выше, чтобы поле и кнопка были видны над клавиатурой.
+            targetTop = absoluteTop - 54;
+        } else {
+            // На компьютере ставим блок формы по центру экрана.
+            targetTop = absoluteTop - (window.innerHeight / 2) + (rect.height / 2);
+        }
+
+        window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
 
         setTimeout(() => {
             phoneInput.focus({ preventScroll: true });
             setCursorToEnd(phoneInput);
             phoneInput.classList.add("highlight-input");
             setTimeout(() => phoneInput.classList.remove("highlight-input"), 900);
-            ensureSubmitVisible();
+            if (isMobile) ensureSubmitVisible();
         }, 350);
     }
 
@@ -951,9 +999,10 @@
         });
 
         phoneInput.addEventListener("beforeinput", (e) => {
-            // На мобильных не даем полю переполниться: максимум 9 реальных цифр, пробелы не считаются.
+            // Максимум 9 реальных цифр. Если часть номера выделена — замену разрешаем.
             if (e.inputType === "insertText" && /\d/.test(e.data || "")) {
-                if (digitsOnly(phoneInput.value).length >= 9) e.preventDefault();
+                const selected = phoneInput.selectionEnd - phoneInput.selectionStart;
+                if (digitsOnly(phoneInput.value).length >= 9 && selected === 0) e.preventDefault();
             }
         });
 
@@ -976,6 +1025,11 @@
             if (document.activeElement === phoneInput) setTimeout(ensureSubmitVisible, 100);
         });
     }
+
+    window.addEventListener("scroll", () => {
+        clearTimeout(window.__mobileButtonsTimer);
+        window.__mobileButtonsTimer = setTimeout(showMobileButtonsIfAwayFromForm, 120);
+    }, { passive: true });
 
     if (callbackForm) {
         callbackForm.addEventListener("submit", function(e) {
