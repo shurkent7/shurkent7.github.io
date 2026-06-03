@@ -406,24 +406,52 @@
             gap: 12px;
             align-items: stretch;
         }
-        .callback-form input {
+        .phone-field {
             flex: 1;
             min-width: 0;
             height: 58px;
-            padding: 0 18px;
+            display: flex;
+            align-items: center;
             border-radius: 18px;
             border: 2px solid #b8dcf5;
             background: #f8fcff;
-            color: #0a2540;
-            font-size: 1.15rem;
-            font-weight: 700;
-            outline: none;
+            overflow: hidden;
             transition: 0.2s;
         }
-        .callback-form input:focus {
+        .phone-field:focus-within {
             border-color: #0284c9;
             box-shadow: 0 0 0 5px rgba(2, 132, 201, 0.12);
             background: #ffffff;
+        }
+        .phone-prefix {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 14px 0 16px;
+            background: #e7f5ff;
+            color: #0a2540;
+            font-size: 1.2rem;
+            font-weight: 900;
+            border-right: 1px solid #c9e7fb;
+            user-select: none;
+        }
+        .callback-form input {
+            flex: 1;
+            min-width: 0;
+            height: 100%;
+            padding: 0 14px;
+            border: 0;
+            background: transparent;
+            color: #0a2540;
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            outline: none;
+        }
+        .callback-form input::placeholder {
+            color: #8ba9be;
+            font-weight: 700;
+            letter-spacing: 0;
         }
         .callback-form button {
             height: 58px;
@@ -495,11 +523,20 @@
             .callback-form {
                 flex-direction: column;
             }
-            .callback-form input,
+            .phone-field,
             .callback-form button {
                 width: 100%;
-                height: 56px;
-                font-size: 1.08rem;
+                height: 64px;
+            }
+            .callback-form input {
+                font-size: 1.45rem;
+            }
+            .phone-prefix {
+                font-size: 1.35rem;
+                padding: 0 14px;
+            }
+            .callback-form button {
+                font-size: 1.15rem;
             }
             .toast {
                 bottom: 96px;
@@ -717,20 +754,23 @@
                 <p class="callback-subtitle">Без посредников. Уточню проблему, цену и ближайшее время выезда.</p>
 
                 <form id="callbackForm" class="callback-form" novalidate>
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value="+380"
-                        inputmode="tel"
-                        autocomplete="tel"
-                        required
-                        aria-label="Номер телефона"
-                        placeholder="+380XXXXXXXXX">
+                    <label class="phone-field" for="phone" aria-label="Номер телефона">
+                        <span class="phone-prefix">+380</span>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone_digits"
+                            inputmode="numeric"
+                            autocomplete="tel-national"
+                            maxlength="11"
+                            required
+                            aria-label="9 цифр номера после +380"
+                            placeholder="__ ___ __ __">
+                    </label>
                     <button type="submit" id="submitBtn">☎️ Заказать звонок</button>
                 </form>
 
-                <div class="form-note">Формат номера: +380XXXXXXXXX</div>
+                <div class="form-note">Введите только 9 цифр после +380. Например: 756177719</div>
             </div>
         </div>
     </section>
@@ -799,7 +839,7 @@
     document.querySelectorAll('.mobile-menu a').forEach(link => link.addEventListener('click', closeMenu));
 
     // ========== ФОРМА ЗАЯВКИ ==========
-    const FORM_ENDPOINT = "https://santehnik-kr.pp.ua/callback.php";
+    const FORM_ENDPOINT = "https://eksk.com.ua/send-pp.php";
 
     const formBlock = document.getElementById("formBlock");
     const callbackForm = document.getElementById("callbackForm");
@@ -826,19 +866,29 @@
         }, 4200);
     }
 
-    function normalizePhoneValue(value) {
+    function digitsOnly(value) {
         let digits = String(value || "").replace(/\D/g, "");
 
-        if (digits.startsWith("380")) {
-            digits = digits.slice(3);
-        } else if (digits.startsWith("80")) {
-            digits = digits.slice(2);
-        } else if (digits.startsWith("0")) {
-            digits = digits.slice(1);
-        }
+        // Если человек вставил полный номер, оставляем только 9 цифр после кода Украины.
+        if (digits.startsWith("380")) digits = digits.slice(3);
+        else if (digits.startsWith("80")) digits = digits.slice(2);
+        else if (digits.startsWith("0")) digits = digits.slice(1);
 
-        digits = digits.slice(0, 9);
-        return "+380" + digits;
+        return digits.slice(0, 9);
+    }
+
+    function formatPhoneDigits(value) {
+        const d = digitsOnly(value);
+        const parts = [];
+        if (d.slice(0, 2)) parts.push(d.slice(0, 2));
+        if (d.slice(2, 5)) parts.push(d.slice(2, 5));
+        if (d.slice(5, 7)) parts.push(d.slice(5, 7));
+        if (d.slice(7, 9)) parts.push(d.slice(7, 9));
+        return parts.join(" ");
+    }
+
+    function getFullPhone() {
+        return "+380" + digitsOnly(phoneInput.value);
     }
 
     function setCursorToEnd(input) {
@@ -886,23 +936,22 @@
 
     if (phoneInput) {
         phoneInput.addEventListener("focus", () => {
-            if (!phoneInput.value || phoneInput.value === "+") phoneInput.value = "+380";
             setCursorToEnd(phoneInput);
             setTimeout(ensureSubmitVisible, 300);
             setTimeout(ensureSubmitVisible, 700);
         });
 
         phoneInput.addEventListener("input", () => {
-            const normalized = normalizePhoneValue(phoneInput.value);
-            if (phoneInput.value !== normalized) {
-                phoneInput.value = normalized;
-            }
+            const formatted = formatPhoneDigits(phoneInput.value);
+            if (phoneInput.value !== formatted) phoneInput.value = formatted;
             setCursorToEnd(phoneInput);
         });
 
-        phoneInput.addEventListener("keydown", (e) => {
-            const protectedPrefix = phoneInput.selectionStart <= 4 && ["Backspace", "Delete"].includes(e.key);
-            if (protectedPrefix) e.preventDefault();
+        phoneInput.addEventListener("paste", () => {
+            setTimeout(() => {
+                phoneInput.value = formatPhoneDigits(phoneInput.value);
+                setCursorToEnd(phoneInput);
+            }, 0);
         });
     }
 
@@ -916,11 +965,11 @@
         callbackForm.addEventListener("submit", function(e) {
             e.preventDefault();
 
-            const phone = normalizePhoneValue(phoneInput.value);
-            phoneInput.value = phone;
+            const phone = getFullPhone();
+            phoneInput.value = formatPhoneDigits(phoneInput.value);
 
             if (!/^\+380\d{9}$/.test(phone)) {
-                showToast("Введите номер в формате +380XXXXXXXXX", "error");
+                showToast("Введите 9 цифр номера после +380", "error");
                 phoneInput.focus();
                 setCursorToEnd(phoneInput);
                 return;
@@ -951,7 +1000,7 @@
                 showToast(data.message || "✅ Заявка отправлена! Сейчас перезвоню", status);
 
                 if (status === "success") {
-                    phoneInput.value = "+380";
+                    phoneInput.value = "";
                 }
             })
             .catch(() => {
